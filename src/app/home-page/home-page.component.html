@@ -1,0 +1,157 @@
+<div class="flex flex-grow  h-screen">
+  <app-side-nav class="sm:flex flex-col h-full hidden bg-gray-50 lg:w-2/12 md:4/12 border-0 shadow-lg z-10"></app-side-nav>
+  <app-dropdown-nav class="sm:hidden w-full fixed top-0 left-0 z-10"></app-dropdown-nav>
+
+  <div *ngIf ="isUser" class="w-full flex-col sm:mt-5 overflow-y-scroll">
+
+    <div class=" w-full py-2 px-5 basis-1/2">
+        <h1 class="font-bold  text-2xl py-2">Accounts</h1>
+        <div>
+          <p class="text-lg">Balance :</p>
+          
+          <div class="text-4xl font-bold" >${{totalBalance}}</div>
+        </div>
+        
+        <div class="flex flex-wrap">
+            <div class=" lg:w-5/12 md:w-5/12 w-10/12  bg-[#6B4AFA] m-2 p-4 rounded-md shadow-lg flex-col text-white font-bold" *ngFor="let account of Accounts">
+                <p class=" mx-3 py-1">Balance : {{ account["balance"] }}</p>               
+                <p class=" mx-3 py-1">**** - **** - {{ account["id"] }}</p>
+            </div>
+        </div>
+      
+    </div>
+
+    <div class=" w-full py-2 px-5 basis-1/2">
+      <h1 class="font-bold  text-2xl py-2">Transactions</h1>
+      <div class="flex flex-wrap">
+          <div class=" relative lg:w-5/12 md:w-5/12 w-10/12  bg-[#6B4AFA] m-2 p-4 rounded-md shadow-lg flex-col text-white font-bold" *ngFor="let transaction of Transactions">
+              <div class="flex items-between">
+                <p class=" mx-1 py-1">Amount : {{ transaction["amount"] }} </p>               
+                <p class=" top-0 py-1 ms-auto">Type : {{ transaction["type"] }}</p>     
+              </div>
+                     
+              <div class="flex items-between">
+                <p class=" mx-3 py-2">**** - **** - {{ transaction["owner"] }}</p>  
+                <p *ngIf="transaction['type']=='T'" class="text-4xl"> &#8594;</p>           
+                <p *ngIf="transaction['type']=='T'" class=" mx-3 py-2">**** - **** - {{ transaction["receiver"] }}</p>     
+              </div>
+              
+          </div>
+      </div>
+    
+  </div>
+
+  </div>
+
+  <div *ngIf ="isEmployee" class="w-full flex-col sm:mt-5 overflow-y-scroll">
+
+    <div class=" w-full py-2 px-5 basis-1/2">
+        <h1 class="font-bold  text-2xl py-2">Account Aprovals</h1>
+        
+        <div class="flex flex-wrap">
+            <div class=" lg:w-5/12 md:w-5/12 w-10/12  bg-[#04AA6D] m-2 p-4 rounded-md shadow-lg flex-col text-white font-bold" *ngFor="let account of AccountReqs">              
+                
+              <div class="flex items-between w-full">
+                <p class=" mx-3 py-1">**** - **** - {{ account["id"] }}</p>
+                <p class=" ml-auto py-1">{{ account["accountOwners"][0]["fullname"] }}</p> 
+              </div>
+              <div class="flex items-between w-full">
+                <p class=" mx-3 py-1">{{ account["branch"]}}</p>
+                <p class=" ml-auto py-1">{{ account["ifsc"]}}</p> 
+              </div>
+                
+                
+            </div>
+        </div>
+      
+    </div>
+
+    <div class=" w-full py-2 px-5 basis-1/2">
+      <h1 class="font-bold  text-2xl py-2">Loan Aprovals</h1>
+      <div class="flex flex-wrap">
+          <div class=" relative lg:w-5/12 md:w-5/12 w-10/12  bg-[#6B4AFA] m-2 p-4 rounded-md shadow-lg flex-col text-white font-bold" *ngFor="let loanReq of LoanReqs">
+                     
+              <div class="flex items-between">
+                <p class=" mx-3 py-2">**** - **** - {{ loanReq["requesterAccount"]["id"] }}</p>            
+                <p class=" ml-auto py-2">${{ loanReq["amount"] }}</p>     
+              </div>
+              <div class="flex items-between">
+                <p class=" mx-3 py-2">Intrest : {{ loanReq["interest"] }} %</p>            
+                <p class=" ml-auto py-2">Term : {{ loanReq["term"] }} years</p>     
+              </div>
+              
+          </div>
+      </div>
+    
+  </div>
+
+  </div>
+
+  <div *ngIf ="isAdmin" class="w-full flex-col sm:mt-5 overflow-y-scroll">
+
+    <div class=" w-full py-2 px-5 basis-1/2">
+      <div>
+        <h1 class="font-bold  text-2xl py-2">Bank Branches</h1>
+        
+      </div>
+        
+        <div class="flex flex-wrap">
+            <div class=" lg:w-5/12 md:w-5/12 w-10/12  bg-[#04AA6D] m-2 p-4 rounded-md shadow-lg flex-col text-white font-bold" *ngFor="let branch of Branches">              
+                
+              <div class="flex items-between w-full">
+                <p class=" mx-3 py-1">{{ branch["id"] }}</p>
+                <p class=" ml-auto py-1">IFSC : {{ branch["ifsc"] }}</p> 
+              </div>
+              <div class="flex items-between w-full">
+                <p class=" mx-3 py-1">{{ branch["city"]}}</p>
+                <p class=" ml-auto py-1">PinCode : {{ branch["pincode"]}}</p> 
+              </div>
+                
+                
+            </div>
+        </div>
+      
+    </div>
+
+    <div class=" w-full py-2 px-5 basis-1/2">
+      <h1 class="font-bold  text-xl ">Employees</h1>
+      <div class="flex flex-wrap">
+          <div class=" relative lg:w-5/12 md:w-5/12 w-10/12  bg-[#6B4AFA] m-2 p-4 rounded-md shadow-lg flex-col text-white font-bold" *ngFor="let employee of Employees">
+                     
+              <div class="flex items-between">
+                <p class=" mx-3 py-2"> {{ employee["fullname"]}}</p>            
+                <p class=" ml-auto py-2">Ph : {{ employee["phonenumber"] }}</p>     
+              </div>
+              <div class="flex items-between">
+                <p class=" mx-3 py-2">{{ employee["email"] }} </p>            
+                <p class=" ml-auto py-2">PAN : {{ employee["pan"] }} </p>     
+              </div>
+              
+          </div>
+      </div>
+    
+  </div>
+
+  <div class=" w-full py-2 px-5 basis-1/2">
+    <h1 class="font-bold  text-xl ">Admins</h1>
+    <div class="flex flex-wrap">
+        <div class=" relative lg:w-5/12 md:w-5/12 w-10/12  bg-[#6B4AFA] m-2 p-4 rounded-md shadow-lg flex-col text-white font-bold" *ngFor="let admin of Admins">
+                   
+            <div class="flex items-between">
+              <p class=" mx-3 py-2"> {{ admin["fullname"]}}</p>            
+              <p class=" ml-auto py-2">Ph : {{ admin["phonenumber"] }}</p>     
+            </div>
+            <div class="flex items-between">
+              <p class=" mx-3 py-2">{{ admin["email"] }} </p>            
+              <p class=" ml-auto py-2">PAN: {{ admin["pan"] }} </p>     
+            </div>
+            
+        </div>
+    </div>
+  
+</div>
+
+  </div>
+
+
+</div>

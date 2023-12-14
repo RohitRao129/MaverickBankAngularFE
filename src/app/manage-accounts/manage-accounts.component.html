@@ -1,0 +1,85 @@
+
+<div class="flex flex-grow  h-screen">
+    <app-side-nav class="sm:flex flex-col h-full hidden bg-gray-50 lg:w-2/12 md:4/12 border-0 shadow-lg z-10"></app-side-nav>
+    <app-dropdown-nav class="sm:hidden w-full fixed top-0 left-0 z-10"></app-dropdown-nav>
+  
+    <div *ngIf ="isUser && !createAccountWindow" class="w-full flex-col sm:mt-5 overflow-y-scroll">
+        <div class="flex justify-between">
+            <div class="text-2xl bold mx-2 font-bold">Accounts</div>
+            <button (click)="toogleCreateAccountWindow()" class="bg-green-500 rounded text-white text-2xl px-2 py-1 font-bold mx-2">Create Account</button>
+
+        </div>
+        <div class="flex-col"  *ngFor="let account of Accounts" >
+            <div class="shadow-lg py-3 px-2  bg-[#6B4AFA] text-white rounded my-2">
+                <div class="flex text-2xl justify-between font-bold">
+                    <p>****-****-{{account["id"]}}</p>
+                    <p>Balance : $ {{account["balance"]}}</p>
+                </div>
+
+                <div class="flex justify-between mt-4">
+                    <p *ngIf="account['approved']" class="bg-gray-50 rounded p-1 text-black font-bold ">Approved</p>
+                    <p *ngIf="!account['approved']" class="bg-gray-50 rounded p-1 text-black font-bold ">Unapproved</p>
+                    <a [routerLink]="['/accountInfo']" [queryParams]="{id:account['id']}" class="bg-lime-200 rounded p-1 text-black font-bold ">More Info</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div *ngIf ="createAccountWindow" class="w-full h-screen  bg-white-100 p-10" >
+        <h1 class="mt-5 text-2xl font-bold">Select a bank branch to Request the Account</h1>
+        <form (submit)="getBranches()" class="flex mt-5">
+            <input name="branchSearch" value="{{branchSearch}}" [(ngModel)]="branchSearch" type="text" class="me-1 border-2 w-full p-2" placeholder="Enter Branch City/Pincode/IFSC" >
+            <button type="submit" class="bg-green-500 mx-1 px-5">Search</button>
+            <button (click)="toogleCreateAccountWindow()" class="p-3 ms-1 bg-red-500 rounded mx-auto">Cancel</button>
+        </form>
+        <p class="text-red-600 text-lg font-bold">{{accountCreationMsg}}</p>
+        <div *ngFor="let branch of Branches" class="w-full overflow-y-scroll">
+            <button (click)="requestAccount(branch['ifsc'])" class="p-3 w-full bg-teal-100 my-1">
+                <div class="flex justify-between  w-full rounded text-2xl font-bold">
+                   <p class="p-2">IFSC : {{branch['ifsc']}} </p> 
+                   <p class="p-2">PingCode : {{branch['pincode']}} </p> 
+                   <p class="p-2">City : {{branch['city']}} </p> 
+                </div>
+            </button>
+        </div>
+
+        
+    </div>
+  
+    <div *ngIf ="isEmployee" class="w-full flex-col sm:mt-5 overflow-y-scroll">
+  
+        <div class="flex justify-between">
+            <div class="text-2xl bold mx-2 font-bold">Account Requests</div>
+            <form class="flex relative" (submit)="searchAccount()">
+                <p class="absolute top-0 left-0 text-red-600 font-bold ">{{searchError}}</p>
+                <input  type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" name="accountQuery" value ="{{accountQuery}}" [(ngModel)]="accountQuery" class="border-2 border-gray-400  rounded p-2 w-full" placeholder="Account number" required />
+                <button type="submit" class="bg-green-500 rounded text-white text-2xl px-2 py-1 font-bold mx-2">Search</button>
+            </form>
+            
+            
+            
+            
+        </div>
+        <div class="flex-col"  *ngFor="let account of AccountReqs" >
+            <div class="shadow-lg py-3 px-2  bg-[#6B4AFA] text-white rounded my-2">
+                <div class="flex text-2xl justify-between font-bold">
+                    <p>****-****-{{account["id"]}}</p>
+                    <p>Owner : {{account['accountOwners'][0]['fullname']}}</p>
+                </div>
+
+                <div class="flex justify-between mt-4">
+                    <p *ngIf="account['approved']" class="bg-gray-50 rounded p-1 text-black font-bold ">Approved</p>
+                    <p *ngIf="!account['approved']" class="bg-gray-50 rounded p-1 text-black font-bold ">Unapproved</p>
+                    <button (click)="approveAccount(account['id'])" class="bg-lime-200 rounded p-1 text-black font-bold ">Approve</button>
+                </div>
+            </div>
+
+        </div>
+  
+      
+    </div>
+
+</div>
+  
+  

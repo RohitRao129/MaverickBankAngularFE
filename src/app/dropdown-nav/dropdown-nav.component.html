@@ -1,0 +1,68 @@
+
+    <div (click)="toogleMenu()" class="w-full py-3 flex bg-cyan-100">
+        <h1 class="text-xl font-bold px-3 font-mono ">Maverick Bank</h1>
+        <mat-icon *ngIf="!isVisible" class="text-2xl me-5 ms-auto" >view_list</mat-icon>
+        <mat-icon *ngIf="isVisible" class="text-2xl me-5 ms-auto">highlight_off</mat-icon>
+    </div>
+
+
+<div *ngIf="isVisible" class="bg-gray-50 h-screen  py-1 transition ease-in-out z-10" role="none">
+    <div class="px-3 my-2 py-2 flex text-gray-800  hover:bg-gray-200 rounded">
+        <mat-icon >home</mat-icon>
+        <button routerLink="/home" class="text-lg font-semibold ms-5">Overview</button>
+    </div>
+    
+    <div *ngIf="!isAdmin" class="px-3 my-2 py-2 flex text-gray-800  hover:bg-gray-200 rounded">
+        <mat-icon>account_balance</mat-icon>
+        <button routerLink ="/accounts" class="text-lg font-semibold ms-5">Accounts</button>
+    </div>
+    
+    <div *ngIf="isUser" class="px-3 my-2 py-2 flex text-gray-800  hover:bg-gray-200 rounded">
+        <mat-icon>swap_horizontal_circle</mat-icon>
+        <button routerLink ="/transactions" class="text-lg font-semibold ms-5">Transactions</button>
+    </div>
+
+    <div *ngIf="isAdmin" class="px-3 my-2 py-2 flex text-gray-800  hover:bg-gray-200 rounded">
+        <mat-icon>swap_horizontal_circle</mat-icon>
+        <button routerLink ="/manageEmployee" class="text-lg font-semibold ms-5">ManageEmployee</button>
+    </div>
+
+    <div *ngIf="isAdmin" class="px-3 my-2 py-2 flex text-gray-800  hover:bg-gray-200 rounded">
+        <mat-icon>swap_horizontal_circle</mat-icon>
+        <button routerLink ="/manageBranch" class="text-lg font-semibold ms-5">Manage Branch</button>
+    </div>
+
+
+
+    <div *ngIf="!isAdmin" class="px-3 my-2 py-2 flex text-gray-800  hover:bg-gray-200 rounded">
+        <mat-icon>ballot</mat-icon>
+        <button routerLink ="/loans" class="text-lg font-semibold ms-5 ">Loans</button>
+    </div>
+
+    <div class="my-10 mx-auto w-10/12 items-center border-t border-neutral-300">
+    </div>
+
+    <div class="px-3 my-2 py-2 flex text-gray-800  hover:bg-gray-200 rounded">
+        <mat-icon>settings</mat-icon>
+        <button routerLink="/user" class="text-lg font-semibold ms-5 ">Setting</button>
+    </div>
+
+    <div class="px-3 my-2 py-2 flex text-gray-800  hover:bg-gray-200 rounded">
+        <mat-icon>exit_to_app</mat-icon>
+        <button (click)="Logout()" class="text-lg font-semibold ms-5 ">Logout</button>
+    </div>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+    </div>
+

@@ -1,0 +1,30 @@
+
+<div class="flex flex-grow  h-screen">
+    <app-side-nav class="sm:flex flex-col h-full hidden bg-gray-50 lg:w-2/12 md:4/12 border-0 shadow-lg z-10"></app-side-nav>
+    <app-dropdown-nav class="sm:hidden w-full fixed top-0 left-0 z-10"></app-dropdown-nav>
+
+    <div class="w-full flex-col mt-20 sm:mt-5 overflow-y-scroll ">
+        <form class="w-full p-3 mx-auto flex justify-between" (submit)="FetchUser()" >
+            <input required placeholder="" class="p-3 mx-5 border-2 rounded shadow-sm basis-10/12 focus:outline-none" type="text" name="searchQuery" [(ngModel)]="searchQuery" placeholder="Id/Email/Phone/PAN"  />
+            <button type="submit" class="p-3 px-5 mx-3 border-2 border-green-600 basis-2/12 rounded bg-green-300" type="submit">Search</button>
+        </form>
+        <div *ngIf="searchResult" class="w-full p-3 mx-auto flex-col justify-between" >
+            <div class="w-full p-3 font-bold" >
+                <div class="flex justify-between w-full my-2 p-3">
+                    <p>{{searchResult['fullname']}}</p>
+                    <p>Ph : {{searchResult['phonenumber']}}</p>
+                </div>
+                <div class="flex justify-between w-full my-2 p-3">
+                    <p>Role : {{searchResult['role']}}</p>
+                    <p>Ph : {{searchResult['email']}}</p>
+                </div>
+            </div>
+            <div class="w-full flex justify-end">
+                <button *ngIf="searchResult['role']!='ADMIN'" type="button" (click)="Promote()" class="p-2 rounded  mx-1 bg-green-400 font-bold text-lg">Promote</button>
+                <button *ngIf="searchResult['role']!='USER'" type="button" (click)="Demote()" class="p-2 rounded  mx-1 bg-blue-400 font-bold text-lg">Demote</button>
+                <button type="button" (click)="Delete()" class="p-2 rounded  mx-1 bg-red-400 font-bold text-lg">Delete</button>
+            </div>
+        </div>
+    </div>
+
+</div>

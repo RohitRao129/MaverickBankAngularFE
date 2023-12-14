@@ -1,0 +1,119 @@
+
+<div class="flex flex-grow  h-screen">
+    <app-side-nav class="sm:flex flex-col h-full hidden bg-gray-50 lg:w-2/12 md:4/12 border-0 shadow-lg z-10"></app-side-nav>
+    <app-dropdown-nav class="sm:hidden w-full fixed top-0 left-0 z-10"></app-dropdown-nav>
+  
+   <div *ngIf="isUser && !newLoanWindow && !approveloanWindow" class="w-full flex-col">
+    <div class="w-full">
+        <h1 class="font-bold text-2xl mx-auto">
+            Approved Loans
+        </h1>
+
+        <div class="flex flex-wrap">
+            <div class=" relative lg:w-5/12 md:w-5/12 w-10/12  bg-[#6B4AFA] m-2 p-4 rounded-md shadow-lg flex-col text-white font-bold" *ngFor="let loan of ApprovedLoans">
+                <div class="flex items-between">
+                  <p class=" mx-1 py-1">Amount : {{ loan["amount"] }} </p>               
+                  <p class=" top-0 py-1 ms-auto">Left : {{ loan["amountleft"] }}</p>     
+                </div>
+                       
+                <div class="flex justify-between text-sm">
+                  <p class=" mx-1 py-2">Borrower - {{ loan["borrower"] }}</p>            
+                  <p class=" mx-1 py-2">Term :  {{ loan["term"] }}</p>     
+                </div>
+
+                <div class="flex justify-between text-sm">
+                    <p class=" mx-1 py-2">Type - {{ loan["type"] }}</p>            
+                    <p class=" mx-1 py-2">Start :  {{ loan["startdate"] }}</p>     
+                  </div>
+                
+            </div>
+        </div>
+
+    </div>
+
+    <div class="w-full my-5">
+        <div class="flex justify-between">
+            <h1 class="font-bold text-2xl">Requested Loans</h1>
+
+            <button (click)="toogleNewLoanWindow()" class="bg-green-400 p-2 rounded border-2 me-20 font-bold text-white">New Loan</button>
+        </div>
+        
+
+        <div class="flex flex-wrap">
+            <div class=" lg:w-5/12 md:w-5/12 w-10/12  bg-[#6B4AFA] m-2 p-4 rounded-md shadow-lg flex-col text-white font-bold" *ngFor="let loan of UnapprovedLoans">
+                <div class="flex items-between">
+                  <p class=" mx-1 py-1">Amount : {{ loan["amount"] }} </p>               
+                  <p class=" py-1 ms-auto">Interest : {{ loan["interest"] }}</p>     
+                </div>
+                       
+                <div class="flex justify-between text-sm">
+                  <p class=" mx-1 py-2">Borrower - {{ loan["borrower"] }}</p>            
+                  <p class=" mx-1 py-2">Term :  {{ loan["term"] }}</p>     
+                </div>
+
+                <div class="flex justify-between text-sm">
+                    <p class=" mx-1 py-2">Type - {{ loan["type"] }}</p> 
+                    <button (click)="CancelLoanReq(loan['id'])" class="bg-green-500 hover:bg-green-600 p-2 rounded text-red-600">Cancel</button>           
+                  </div>
+                
+            </div>
+        </div>
+
+    </div>
+   </div>
+
+   <div *ngIf="isUser && newLoanWindow" class="flex w-full p-2">
+    <form class=" h-5/6 bg-gray-50 shadow-lg w-8/12 flex-col mx-auto my-auto p-2" (submit)="NewLoanReq()">
+                
+        <div class="h-2/6 w-full bg-gray-300 overflow-y-scroll rounded border overflow-y-scroll" >
+            <div *ngFor ="let account of Accounts" class="p-2 bg-green-100 rounded my-1 flex justify-between">
+                <p class="mx-2 text-lg md:text-xl font-bold  p-1 rounded">Acc.no. : {{account['id']}}</p>
+                <p class="mx-2 text-lg md:text-xl font-bold  p-1 rounded ">Balance : {{account['balance']}}</p>
+                <button type="button" (click)="selectAccount(account['id'])"  class="p-2 bg-red-200 rounded font-bold hover:bg-red-500 ">Select</button>
+            </div>
+
+        </div>
+        <p class="text-2xl font-bold py-1">{{SelectAccountMsg}}</p>
+        <input required autocomplete="off" readonly onfocus="this.removeAttribute('readonly');" class="p-2 my-2 border rounded w-full" name="amount" [(ngModel)]="amount" value="{{amount}}" type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" placeholder="Amount" />
+       
+            <div class="w-full p-2 flex justify-between rounded bg-gray-50">
+                <label class="text-2xl" for="cars">Duration:</label>
+                <select required class="py-1 px-5  mx-2 border-2 w-8/12" name="template" [(ngModel)]="template">
+                <option class="p-2 font-bold" value="1">Intrest: 6% , 10 years</option>
+                <option class="p-2 font-bold" value="2">Intrest: 9% , 5 years</option>
+                <option class="p-2 font-bold" value="3">Intrest: 12% , 2 years</option>
+                </select>
+            </div> 
+            
+            <div class="w-full p-2 flex justify-between rounded bg-gray-50">
+                <label class="text-2xl" for="cars">Type:</label>
+                <select required class="py-1 px-5  mx-2 border-2 w-8/12" name="loanType" [(ngModel)]="loanType">
+                <option class="p-2 font-bold" value="HomeLoan">Home Loan</option>
+                <option class="p-2 font-bold" value="Business">Business</option>
+                <option class="p-2 font-bold" value="Personal">Personal</option>
+                </select>
+            </div>
+        <p class="text-xl text-red-500 font-bold py-1">{{errorMsg}}</p>
+        <div class="flex">
+            <button type="button" (click)="toogleNewLoanWindow()" class="bg-red-300 rounded px-4 p-2 m-2 hover:bg-red-500 font-bold  mx-auto">Cancel</button>
+            <button type="submit" class="bg-red-300 rounded p-2 m-2 hover:bg-red-500 font-bold  mx-auto">Request Loan</button>
+        
+        </div>
+        
+
+        </form>
+
+   </div>
+
+   <div *ngIf="isEmployee" class="w-full">
+    <div *ngFor="let loan of UnapprovedLoans" class="w-full">
+        <div class="w-5/12 rounded bg-teal-400 font-bold p-3 m-4">
+            <p>Id : {{loan['id']}}</p>
+        </div>
+
+    </div>
+   </div>
+
+</div>
+  
+  

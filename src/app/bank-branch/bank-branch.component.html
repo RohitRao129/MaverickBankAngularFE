@@ -1,0 +1,37 @@
+<div class="flex flex-grow  h-screen">
+    <app-side-nav class="sm:flex flex-col h-full hidden bg-gray-50 lg:w-2/12 md:4/12 border-0 shadow-lg z-10"></app-side-nav>
+    <app-dropdown-nav class="sm:hidden w-full fixed top-0 left-0 z-10"></app-dropdown-nav>
+
+    <div *ngIf ="isAdmin" class="w-full flex-col sm:mt-5 overflow-y-hidden mx-5 mt-20">
+
+        <form class="w-full flex" (submit)="searchBranch()">
+            <input name="branchSearchQuery" value="{{branchSearchQuery}}" [(ngModel)]="branchSearchQuery" class=" me-3 w-full border-2 rounded focus:outline-lime-200  p-3 " placeholder="Branch City/PinCode/IFSC Code" >
+            <button type="submit" class="ms-2 px-5 bg-lime-200 rounded">Search</button>
+        </form>
+        <div class="h-2/4 overflow-y-scroll w-full my-2">
+            <div *ngFor ="let branch of Branches" class="flex w-full">
+                <div class=" flex flex-wrap bg-green-200 rounded w-full p-3 my-2 justify-between">
+                        <p class="text-lg font-bold p-2">City : {{branch['city']}}</p>
+                        <p class="text-lg font-bold p-2">Pin : {{branch['pincode']}}</p>
+                        <p class="text-lg font-bold p-2">IFSC : {{branch['ifsc']}}</p>
+                        <form *ngIf="searched" class="flex" (submit)="deleteBranch(branch['ifsc'])">
+                            <input ng-required="1"  name="TransferBranchIfsc" value="{{TransferBranchIfsc}}" [(ngModel)]="TransferBranchIfsc" class="text-hidden focus:text-md me-3 w-full border-2 rounded focus:outline-lime-200  p-3 " placeholder="Branch City/PinCode/IFSC Code to transfer accounts" >
+                            <button type="submit " class="bg-red-400 rounded border-2 p-2">Delete</button>
+                        </form>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="h-2/4 overflow-y-scroll w-full my-3">
+            <form class="w-full flex" (submit)="addBranch()">
+                <input name="newBranchCity" value="{{newBranchCity}}" [(ngModel)]="newBranchCity"  class=" me-3 w-full border-2 rounded focus:outline-lime-200  p-3 " placeholder="Branch City" >
+                <input name="newBranchPinCode" value="{{newBranchPinCode}}" [(ngModel)]="newBranchPinCode" class=" me-3 w-full border-2 rounded focus:outline-lime-200  p-3 " type="text" maxlength="6" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" placeholder="PinCode" >
+                <button type="submit" class="ms-2 px-5 bg-lime-200 rounded">Add Branch</button>
+            </form>
+
+            <div class="w-full font-bold text-2xl text-green-500">{{branchAddedMsg}}</div>
+
+        </div>  
+    </div>
+</div>

@@ -1,0 +1,101 @@
+<div class="flex flex-grow  h-screen">
+    <app-side-nav class="sm:flex flex-col h-full hidden bg-gray-50 lg:w-2/12 md:4/12 border-0 shadow-lg z-10"></app-side-nav>
+    <app-dropdown-nav class="sm:hidden w-full fixed top-0 left-0 z-10"></app-dropdown-nav>
+  
+    <div class="w-full flex-col sm:mt-5">
+  
+        <div class="flex flex-grow flex-col">
+            
+            <form class="w-6/12 sm:8/12 mx-auto">
+            <div class="flex justify-between">
+
+                <div class="relative w-6/12 me-1">
+                    <p class="bg-white text-sm absolute top-0 left-1 px-2">Name</p>
+                    <input disabled="{{Disabled}}" type="text" name="name" [(ngModel)]="name" class="border-2 border-gray-400  rounded p-2 w-full mt-2" placeholder="Name as in Bank" />
+                    <p class="text-red-500">{{nameMsg}}</p>
+                </div>
+        
+                <div class="relative w-6/12 ms-1">
+                    <p class="bg-white text-sm absolute top-0 left-1 px-2">Phone</p>
+                    <input  disabled="{{Disabled}}" name="phNumber" [(ngModel)]="phNumber" type="text" maxlength="10" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" class="border-2 border-gray-400  rounded p-2 w-full mt-2" placeholder="Phone number" />
+                    <p class="text-red-500">{{phNumberMsg}}</p>
+                </div>
+
+            </div>
+
+            <div class="flex justify-between">
+
+                <div class="relative w-6/12 me-1">
+                    <p class="bg-white text-sm absolute top-0 left-1 px-2">Email</p>
+                    <input  disabled="{{Disabled}}" name="email" [(ngModel)]="email" type="email"   class="border-2 border-gray-400  rounded p-2 w-full mt-2" placeholder="email" />
+                    <p class="text-red-500">{{emailMsg}}</p>
+                </div>
+                
+                <div class="relative w-6/12 ms-1">
+                    <p class="bg-white text-sm absolute top-0 left-1 px-2">PAN</p>
+                    <input  disabled="{{Disabled}}" name="pan" [(ngModel)]="pan" type="text" maxlength="10"   class="border-2 border-gray-400  rounded p-2 w-full mt-2" placeholder="PAN" />
+                    <p class="text-red-500">{{panMsg}}</p>
+                </div>
+
+            </div>
+        
+
+            <div class="relative">
+                <p class="bg-white text-sm absolute top-0 left-1 px-2">Address</p>
+                <input  disabled="{{Disabled}}" name="address" [(ngModel)]="address" type="text" class="border-2 border-gray-400  rounded p-2 w-full mt-2" placeholder="Address" />
+                <p class="text-red-500">{{addressMsg}}</p>
+            </div>
+
+
+
+            <div class="flex justify-between">
+
+                <div class="relative w-6/12 me-1">
+                    <p class="bg-white text-sm absolute top-0 left-1 px-2">Pincode</p>
+                    <input  disabled="{{Disabled}}" name="pincode" [(ngModel)]="pincode" type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" maxlength="6" class="border-2 border-gray-400  rounded p-2 w-full mt-2" placeholder="PinCode" />
+                    <p class="text-red-500">{{pincodeMsg}}</p>
+                </div>
+    
+    
+                <div class="relative w-6/12 ms-1">
+                    <p class="bg-white text-sm absolute top-0 left-1 px-2">Date Of birth</p>
+                    <input  disabled="{{Disabled}}" name="dateOfBirth" [(ngModel)]="dateOfBirth" type="date" class="text-gray-400 border-2 border-gray-400  rounded p-2 w-full mt-2" />
+                    <p class="text-red-500">{{dobMsg}}</p>
+                </div>
+
+            </div>
+
+
+            
+                         
+                    
+            
+                        
+            
+                        <!-- Submit button -->
+                        <div >
+                          <button
+                          type="button"
+                          class="inline-block w-full my-3 rounded  bg-cyan-600 text-white px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
+                          data-te-ripple-init
+                          data-te-ripple-color="light"
+                          (click)="ToogleUpdateButton()"
+                          >
+                          {{EditButtonTxt}}
+                        </button>
+        
+                        </div>
+    
+            </form>
+    
+            
+        </div>
+      
+    </div>
+  
+    </div>
+  
+
+
+
+

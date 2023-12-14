@@ -1,0 +1,23 @@
+
+<div class="flex flex-grow  h-screen">
+    <app-side-nav class="sm:flex flex-col h-full hidden bg-gray-50 lg:w-2/12 md:4/12 border-0 shadow-lg z-10"></app-side-nav>
+    <app-dropdown-nav class="sm:hidden w-full fixed top-0 left-0 z-10"></app-dropdown-nav>
+
+    <div class="w-full flex-col sm:mt-5 overflow-y-scroll"> 
+        <div class="w-full bg-gray-50 p-3 text-2xl text-red-800 font-bold">
+                   <p class="my-2 p-2 border rounded">Account Number : ****-****-{{Account[0]['id']}}</p>
+                   <p class="my-2 p-2 border rounded">Approved : {{Account[0]['approved']}}</p>
+                   <p class="my-2 p-2 border rounded">Creation Date : {{Account[0]['creationdate']}}</p>
+                   <p class="my-2 p-2 border rounded">IFSC : {{Account[0]['ifsc']}}</p>
+                   <p class="my-2 p-2 border rounded">Balance : {{Account[0]['balance']}}</p>
+                   <div class="my-2 p-2 border rounded">
+                    <h1 class="p-2 ">Owners:</h1>
+                    <div *ngFor="let user of Account[0]['accountOwners']">
+                        <div class="my-2 p-2 border rounded">{{user['phonenumber']}}</div>
+                    </div>
+                   </div>
+        </div>
+    </div>
+    
+    
+    </div>

@@ -1,0 +1,101 @@
+        <div class=" p-10 md:w-8/12 lg:w-6/12 mx-auto md:mt-20 shadow-lg">
+            <form class="{{credForm}}" (ngSubmit)="hideCreds()">
+                <!-- PhoneNumber input -->
+                <input name="phNumber" [(ngModel)]="phNumber" type="text" maxlength="10" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" class="border-2 border-gray-400  rounded p-2 w-full mt-2" placeholder="Phone number" />
+                <p class="text-red-500">{{phNumberMsg}}</p>
+                <!-- PhoneNumber input -->
+                <input name="email" [(ngModel)]="email" type="email"   class="border-2 border-gray-400  rounded p-2 w-full mt-2" placeholder="email" />
+                <p class="text-red-500">{{emailMsg}}</p>
+                <!-- PhoneNumber input -->
+                <input name="pan" [(ngModel)]="pan" type="text" maxlength="10"   class="border-2 border-gray-400  rounded p-2 w-full mt-2" placeholder="PAN" />
+                <p class="text-red-500">{{panMsg}}</p>
+                
+                <!-- Password input -->
+                <div class="w-full my-3 flex justify-between">
+                    <input name="password" [(ngModel)]="password" type="password" class="border-2 border-gray-400 rounded p-2 w-6/12 mr-1" placeholder="Password" />
+
+                    <!--Confirm Password input -->
+                    <input name="confirmPassword"[(ngModel)]="confirmPassword" type="password" class="border-2 border-gray-400 rounded p-2 w-6/12 ml-1 " placeholder="Confirm Password" />
+                </div>
+                <p class="text-red-500">{{passwordMsg}}{{confirmPasswordMsg}}</p>
+
+
+                <button
+                    type="submit"
+                    class="inline-block w-full rounded  bg-cyan-600 text-white px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
+                    data-te-ripple-init
+                    data-te-ripple-color="light">
+                    Next
+                </button>
+
+
+                <!-- Divider -->
+                  <div
+                  class="my-4 flex items-center before:mt-0.5 before:flex-1 before:border-t before:border-neutral-300 after:mt-0.5 after:flex-1 after:border-t after:border-neutral-300">
+                  <p
+                    class="mx-4 mb-0 text-center font-semibold dark:text-neutral-200">
+                    OR
+                  </p>
+                </div>
+
+                <a
+                  routerLink ="/login"
+                  class="inline-block text-center w-full mx-auto  rounded bg-lime-500 px-10  pb-2.5 pt-3 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
+                  data-te-ripple-init
+                  data-te-ripple-color="light">
+                  Login
+              </a>
+              
+
+            </form>
+
+
+         <form class="{{infoForm}} " (ngSubmit) ="handleSignUp()" >
+            <!-- Name input -->
+            <input type="text" name="name" [(ngModel)]="name" class="border-2 border-gray-400  rounded p-2 w-full mt-2" placeholder="Name as in Bank" />
+            <p class="text-red-500">{{nameMsg}}</p>
+            <div class="w-full mt-2 flex justify-between">
+                <input name="address" [(ngModel)]="address" type="text" class="border-2 border-gray-400  rounded p-2 w-full mr-1" placeholder="Address" />
+                <input name="pincode" [(ngModel)]="pincode" type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" maxlength="6" class="border-2 border-gray-400  rounded p-2 w-full ml-1" placeholder="PinCode" />
+
+            </div>
+            <p class="text-red-500">{{addressMsg}}  {{pincodeMsg}}</p>
+            
+            <input name="dateOfBirth" [(ngModel)]="dateOfBirth" type="date" class="text-gray-400 border-2 border-gray-400  rounded p-2 w-full mt-2" />
+            <p class="text-red-500">{{dobMsg}}</p>
+
+            
+
+            <!-- Submit button -->
+            <div >
+              <button
+              type="button"
+              class="inline-block w-full my-3 rounded  bg-cyan-600 text-white px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
+              data-te-ripple-init
+              data-te-ripple-color="light"
+              (click)="showCreds()">
+              Back
+            </button>
+
+            <button
+              type="submit"
+              class="inline-block w-full my-3 rounded  bg-cyan-600 text-white px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
+              data-te-ripple-init
+              data-te-ripple-color="light">
+              Create Account
+            </button>
+
+            </div>
+            
+
+          </form>
+      
+          <div class="p-5 relative text-center font-medium text-lg text-gray-800 bg-cyan-100 rounded {{successdisplay}}">
+              <div class="flex absolute  space-x-2 animate-pulse  p-3">
+                <div class="w-3 h-3 bg-gray-500 rounded-full"></div>
+                <div class="w-3 h-3 bg-gray-500 rounded-full"></div>
+                <div class="w-3 h-3 bg-gray-500 rounded-full"></div>
+              </div>
+              Created taking to Login!!
+          </div>
+        </div>
